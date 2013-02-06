@@ -11,10 +11,21 @@ describe File do
 
   context '.dos2unix' do
     it 'converts \r\n to \n' do
+      dos_format = %w[1 2 3 4].join("\r\n") + "\r\n"
       unix_format = %w[1 2 3 4].join("\n") + "\n"
-      path = tempfile(%w[1 2 3 4].join("\r\n") + "\r\n")
+      path = tempfile(dos_format)
 
       File.dos2unix(path).should == unix_format
+    end
+  end
+
+  context '.unix2dos' do
+    it 'converts \n to \r\n' do
+      dos_format = %w[1 2 3 4].join("\r\n") + "\r\n"
+      unix_format = %w[1 2 3 4].join("\n") + "\n"
+      path = tempfile(unix_format)
+
+      File.unix2dos(path).should == dos_format
     end
   end
 

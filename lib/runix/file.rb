@@ -8,4 +8,8 @@ class File
   def self.dos2unix(path)
     `tr -d "\15\32" < '#{path}'`
   end
+
+  def self.unix2dos(path)
+    `sed 's/$'"/$(echo \\\r)/" '#{path}'`
+  end
 end
