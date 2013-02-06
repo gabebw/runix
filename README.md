@@ -1,6 +1,10 @@
 # Runix
 
-TODO: Write a gem description
+What if every method were implemented by shelling out to the Unix system?
+
+Let's see how far we can take Unix.
+
+[Take it to the limit](http://www.youtube.com/watch?v=YwASii2f5c8)!
 
 ## Installation
 
@@ -18,7 +22,14 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Convert line endings:
+
+* `File.unix2dos(path_to_file)`
+* `File.dos2unix(path_to_file)`
+
+Count the number of lines in a file without reading it all into memory:
+
+* `File.number_of_lines(path_to_file)`
 
 ## Contributing
 
