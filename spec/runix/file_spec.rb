@@ -3,7 +3,8 @@ require 'tempfile'
 describe File do
   context '.number_of_lines' do
     it 'is correct' do
-      path = tempfile(%w[1 2 3 4].join("\n") + "\n")
+      four_lines = %w[1 2 3 4].join("\n") + "\n")
+      path = tempfile_containing(four_lines)
 
       File.number_of_lines(path).should == 4
     end
@@ -13,7 +14,7 @@ describe File do
     it 'converts \r\n to \n' do
       dos_format = %w[1 2 3 4].join("\r\n") + "\r\n"
       unix_format = %w[1 2 3 4].join("\n") + "\n"
-      path = tempfile(dos_format)
+      path = tempfile_containing(dos_format)
 
       File.dos2unix(path).should == unix_format
     end
@@ -23,16 +24,16 @@ describe File do
     it 'converts \n to \r\n' do
       dos_format = %w[1 2 3 4].join("\r\n") + "\r\n"
       unix_format = %w[1 2 3 4].join("\n") + "\n"
-      path = tempfile(unix_format)
+      path = tempfile_containing(unix_format)
 
       File.unix2dos(path).should == dos_format
     end
   end
 
-  def tempfile(content)
-    Tempfile.new('whatever').tap do |file|
-      file.write(content)
-      file.close
+  def tempfile_containing(content)
+    Tempfile.new('whatever').tap do |tempfile|
+      tempfile.write(content)
+      tempfile.close
     end.path
   end
 end
